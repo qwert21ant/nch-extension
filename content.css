@@ -75,17 +75,3 @@ div.config_bar select {
 
 	font-size: 14px;
 }
-
-/* solutions */
-
-button.solution {
-	outline: 4px solid #2ad100;
-}
-
-.solutionText {
-	color: #21a300;
-}
-
-.solutionText::before {
-	content: "🟢";
-}

@@ -101,17 +101,6 @@ function stopCatch(switchBtn){
 	window.catchTId = null;
 }
 
-function saveReviewTimeout(){
-	let el = Q("input[name='rw_timeout']");
-	if(Number(el.value) <= 500){
-		el.focus();
-		return;
-	}
-	
-	window.reviewTimeout = Number(el.value);
-	window.postMessage({from: "INJECT", to: "CONTENT", operation: "set_rw_timeout", rw_timeout: Number(el.value)});
-}
-
 let selectTasksetInner_ = selectTasksetInner;
 selectTasksetInner = (tasksetOrd, x) => {
 	selectTasksetInner_(tasksetOrd, x);

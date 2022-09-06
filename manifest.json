@@ -1,9 +1,9 @@
 {
 	"manifest_version": 3,
 
-	"name": "NearCrowdHelper+",
-	"description": "Extension for manage accounts on nearcrowd.com, share MG answers with other users and some other feature",
-	"version": "1.5",
+	"name": "NearCrowdHelper",
+	"description": "Extension for manage accounts on nearcrowd.com and some other feature",
+	"version": "1.6",
 	"author": "qwert21",
 
 	"icons": {
@@ -16,7 +16,7 @@
 			"24": "icons_ext/icon24.png",
 			"32": "icons_ext/icon32.png"
 		},
-		"default_title": "NearCrowdHelper+"
+		"default_title": "NearCrowdHelper"
 	},
 
 	"options_page": "options.html",
