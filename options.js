@@ -51,7 +51,7 @@ function createTR(tag, id, key, onChange, onDelete){
 
 async function editAcc(old_tag, tag, id, key){
 	if(tag){
-		localConfig.acc_data[tag] = acc_data[old_tag];
+		localConfig.acc_data[tag] = localConfig.acc_data[old_tag];
 		delete localConfig.acc_data[old_tag];
 		old_tag = tag;
 	}

@@ -112,8 +112,6 @@ selectTasksetInner = (tasksetOrd, x) => {
 		return;
 	}
 
-	return; // temporarily
-
 	if(tasksetOrd == 750) return;
 
 	if(dx.status == "free" && dx.can_claim_review_in == "00:00:00"){
