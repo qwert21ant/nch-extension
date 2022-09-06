@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Security-Policy" content="script-src 'self' unsafe-inline; script-src-elem 'self' unsafe-inline;">
+	<link rel="stylesheet" type="text/css" href="options.css">
+	<title>NCH options</title>
+
+	<script src="storage.js"></script>
+</head>
+<body>
+	<div id="tabs">
+		<a href="#accounts" class="selected">
+			Accounts
+		</a>
+		<a href="#review">
+			Review
+		</a>
+		<a href="#server">
+			Server
+		</a>
+		<div class="sep"></div>
+		<a id="save_button">
+			Save changes
+		</a>
+	</div>
+	<div id="main">
+		<div id="accounts">
+			<h1 class="title">List of accounts</h1>
+			<table id="accs" width=100%><tbody>
+				<tr>
+					<th width=15%>Tag</th>
+					<th width=40%>Account ID</th>
+					<th width=40%>Secret key</th>
+					<th class="del" width=30px>DEL</th>
+				</tr>
+			</tbody></table>
+			
+			<div class="new_account_wrap">
+				<div class="fblock">
+					<h3 class="title">Add account</h3>
+					<div class="input_group2">
+						<span>Tag</span>
+						<input type="text" name="acc_tag" autocomplete="off">
+					</div>
+					<div class="input_group2">
+						<span>Accound ID</span>
+						<input type="text" name="acc_id" autocomplete="off">
+					</div>
+					<div class="input_group2">
+						<span>Secret key</span>
+						<input type="text" name="acc_key" autocomplete="off">
+					</div>
+					<button name="add_acc">Add</button>
+				</div>
+				<!-- TODO: import account -->
+				<div class="fblock import_account" style="display: none;">
+					<h3 class="title">Import account</h3>
+					<button name="import_acc">From JSON</button>
+				</div>
+			</div>
+		</div>
+		<div id="review">
+			<h1 class="title">Review settings</h1>
+			<div class="input_group">
+				<span>Review timeout:</span>
+				<input type="number" name="rw_timeout">
+			</div>
+			<div class="input_group">
+				<span>Review alert sound:</span>
+				<input type="text" name="rw_sound">
+				<button name="rw_sound_test" style="margin-left: 15px;">Test</button>
+			</div>
+		</div>
+		<div id="server">
+			<h1 class="title">Server settings</h1>
+			<div class="input_group">
+				<span>Server IP:</span>
+				<input type="text" name="server_ip">
+			</div>
+			<div class="input_group">
+				<span>Server key:</span>
+				<input type="text" name="server_key">
+			</div>
+		</div>
+	</div>
+	<script src="options.js"></script>
+</body>
+</html>

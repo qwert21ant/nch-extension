@@ -1,0 +1,91 @@
+/* config button */
+
+div.cfg_btn {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+
+	z-index: 10;
+
+	width: 35px;
+	height: 35px;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	border: 1px solid black;
+	border-radius: 50%;
+	background-color: #f2f0b1;
+
+	cursor: pointer;
+	user-select: none;
+}
+
+div.cfg_btn>img {
+	display: flex;
+	width: 22px;
+
+	transition: all 300ms ease-out;
+}
+
+.cfg_btn_rot {
+	transform: rotate(60deg);
+}
+
+/* config panel */
+
+div.config_panel {
+	position: absolute;
+	top: 0;
+	right: 0;
+
+	z-index: 9;
+
+	margin: 5px;
+	padding: 10px;
+
+	width: 350px;
+	height: 30px;
+
+	border: 1px solid black;
+	background-color: #f7f7f7;
+}
+
+/* config bar  */
+
+div.config_bar {
+	display: flex;
+
+	height: 30px;
+
+	flex-direction: row;
+	justify-content: left;
+	align-items: center;
+}
+
+div.config_bar>* {
+	margin: 0 5px;
+}
+
+div.config_bar select {
+	height: 25px;
+
+	box-sizing: border-box;
+
+	font-size: 14px;
+}
+
+/* solutions */
+
+button.solution {
+	outline: 4px solid #2ad100;
+}
+
+.solutionText {
+	color: #21a300;
+}
+
+.solutionText::before {
+	content: "🟢";
+}

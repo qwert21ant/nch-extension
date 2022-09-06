@@ -1,0 +1,263 @@
+body {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+
+	width: 100vw;
+	height: 100vh;
+
+	background-color: #f2f2f2;
+	padding: 0;
+	margin: 0;
+
+	font-family: Verdana;
+}
+
+hr {
+	margin: 10px 0;
+}
+
+/* tabs */
+
+div#tabs {
+	align-self: center;
+
+	width: 220px;
+	min-width: 150px;
+}
+
+#tabs>a {
+	display: block;
+
+	height: 60px;
+
+	color: black;
+
+	text-decoration: none;
+
+	cursor: pointer;
+	user-select: none;
+
+	text-align: center;
+	line-height: 60px;
+
+	font-size: 20px;
+}
+
+#tabs>a.selected {
+	background-color: white;
+	box-shadow: -1px 0 0 0 gray;
+}
+
+#tabs>.sep {
+	height: 60px;
+}
+
+#tabs>#save_button {
+	background: linear-gradient(to right, #afa 50%, #fff 50%);
+    background-size: 200% 100%;
+    background-position: right;
+	box-shadow: -1px 0 0 0 #0c0;
+
+	transition: all 500ms ease-out;
+}
+
+#tabs>#save_button.saved {
+	background-position: left;
+	box-shadow: -1px 0 0 0 gray;
+}
+
+/* main  */
+
+div#main {
+	width: 800px;
+	min-width: 500px;
+	height: 100%;
+
+	padding: 30px;
+
+	box-sizing: border-box;
+
+	background-color: white;
+
+	overflow-y: auto;
+}
+
+div#main>div {
+	display: none;
+}
+
+div#main>div:target {
+	display: block;
+}
+
+.title {
+	text-align: center;
+	font-weight: normal;
+}
+
+/* accounts */
+
+table#accs {
+	border-collapse: collapse;
+	border: 1px solid black;
+
+	font-family: Consolas;
+
+	table-layout: fixed;
+}
+
+table#accs tr {
+	height: 30px;
+}
+
+table#accs th {
+	border: 1px solid black;
+	background-color: #9dfcad;
+
+	font-size: 16px;
+}
+
+table#accs td {
+	padding: 0;
+
+	border: 1px solid black;
+
+	text-align: center;
+
+	overflow: hidden;
+}
+
+table#accs td input {
+	box-sizing: border-box;
+
+	padding: 0 3px;
+	margin: 0;
+
+	height: 30px;
+	width: 100%;
+
+	border: none;
+
+	font-family: Consolas;
+	font-size: 14px;
+}
+
+table#accs th.del, td.del {
+	background-color: #fc7c7c;
+}
+
+td.del {
+	cursor: pointer;
+}
+
+img.btn_delete {
+	width: 70%;
+}
+
+/* button */
+
+button {
+	min-width: 90px;
+
+	padding: 5px 10px;
+
+	box-sizing: border-box;
+
+	border: 1px solid gray;
+}
+
+button:active {
+	background-color: #dbdbdb;
+}
+
+button:focus {
+	border: 2px solid black;
+}
+
+/* input_group  */
+
+.input_group span {
+	display: block;
+
+	margin: 10px 0;
+
+	font-size: 15px;
+}
+
+.input_group input {
+	width: 250px;
+	height: 30px;
+
+	margin-left: 30px;
+
+	box-sizing: border-box;
+
+	color: #333;
+
+	font-family: Consolas;
+	font-size: 16px;
+}
+
+/* input_group2  */
+
+.input_group2 {
+	margin: 10px 10%;
+}
+
+.input_group2 span {
+	display: block;
+
+	margin: 0 0 2px 0;
+
+	font-size: 10px;
+}
+
+.input_group2 input {
+	width: 100%;
+	height: 25px;
+
+
+	box-sizing: border-box;
+
+	color: #333;
+
+	font-family: Consolas;
+	font-size: 18px;
+}
+
+
+.new_account_wrap {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+
+	width: 100%;
+
+	margin-top: 30px;
+}
+
+.new_account_wrap>* {
+	flex-shrink: 1;
+	background-color: #eee;
+}
+
+.fblock {
+	width: 40%;
+
+	padding: 5px;
+	margin: 0 10px;
+
+	box-sizing: border-box;
+}
+
+.fblock button {
+	margin-left: 50%;
+	margin-bottom: 10px;
+	transform: translateX(-50%);
+}
+
+.import_account button {
+	margin-top: 50px;
+	width: 100px;
+}
