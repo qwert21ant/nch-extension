@@ -1,15 +1,21 @@
 var AnswersCollector = {
-	tasksetOrd: null,
-	taskId: null,
+	task_info: {
+		taskset: null,
+		id: null,
+		mode: null,
+		resubmits: null
+	},
 	answers: {},
 
-	setTaskInfo(ord, id){
-		this.tasksetOrd = ord;
-		this.taskId = id;
+	setTaskInfo(taskset, task_id, mode, resubmits){
+		this.task_info.taskset = taskset;
+		this.task_info.id = task_id;
+		this.task_info.mode = ~mode.indexOf('review') ? 'review' : 'task';
+		this.task_info.resubmits = resubmits;
 	},
 
 	async send(){
-		window.postMessage({from: "INJECT", to: "WORKER", operation: "send", taskset: this.tasksetOrd, task_id: this.taskId, answers: this.answers});
+		window.postMessage({from: "INJECT", to: "WORKER", operation: "send", task_info: this.task_info, answers: this.answers});
 		return new Promise((res, rej) => {
 			let tid = setTimeout(() => rej("Timeout"), 5000);
 
@@ -27,7 +33,7 @@ var AnswersCollector = {
 	},
 
 	async find(){
-		window.postMessage({from: "INJECT", to: "WORKER", operation: "find", taskset: this.tasksetOrd, task_id: this.taskId});
+		window.postMessage({from: "INJECT", to: "WORKER", operation: "find", task_info: this.task_info});
 		return new Promise((res, rej) => {
 			let tid = setTimeout(() => rej("Timeout"), 5000);
 
@@ -59,13 +65,13 @@ var AnswersCollector = {
 	},
 
 	async collect(){
-		if(!this.tasksetOrd || !this.taskId){
-			console.error("No tasksetOrd or taskId");
+		if(!this.task_info.taskset || !this.task_info.id){
+			console.error("No taskset or id");
 			return;
 		}
 
 		return new Promise((res, rej) => {
-			ajax("get_task/" + this.tasksetOrd + "/" + this.taskId, task_data => {
+			ajax("get_task/" + this.task_info.taskset + "/" + this.task_info.id, task_data => {
 				try {
 					task_data = JSON.parse(task_data);
 				} catch(err) {
@@ -106,7 +112,7 @@ var AnswersCollector = {
 					);
 					res();
 				});
-			}, null, {user_task_id: this.taskId});
+			}, null, {user_task_id: this.task_info.id});
 		});
 	},
 
@@ -216,7 +222,7 @@ loadTaskInner = (tasksetOrd, userTaskId, x, reviewTimeLeft) => {
 		return;
 	}
 
-	AnswersCollector.setTaskInfo(tasksetOrd, dx.user_task_id);
+	AnswersCollector.setTaskInfo(tasksetOrd, dx.user_task_id, dx.mode, dx.resubmits);
 
 	let timeEl = divTask.children[4];
 

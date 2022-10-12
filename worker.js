@@ -2,13 +2,13 @@ importScripts("storage.js");
 
 //--------------------------------------------------
 
-async function sendAnswers(key, taskset, task_id, answers){
+async function sendAnswers(key, task_info, answers){
 	return fetch("http://" + (await Storage.get("server_ip")) + ":8080/api/task", {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json"
 		},
-		body: JSON.stringify({"operation": "set", "key": key, "taskset": taskset, "task_id": task_id, "answers": JSON.stringify(answers)})
+		body: JSON.stringify({"operation": "set", "key": key, "task_info": JSON.stringify(task_info), "answers": JSON.stringify(answers)})
 	}).then(resp => {
 		if(!resp.ok)
 			throw new Error("Responce status: " + resp.status);
@@ -19,13 +19,13 @@ async function sendAnswers(key, taskset, task_id, answers){
 	});
 }
 
-async function findAnswers(key, taskset, task_id){
+async function findAnswers(key, task_info){
 	return fetch("http://" + (await Storage.get("server_ip")) + ":8080/api/task", {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json"
 		},
-		body: JSON.stringify({"operation": "find", "key": key, "taskset": taskset, "task_id": task_id})
+		body: JSON.stringify({"operation": "find", "key": key, "task_info": JSON.stringify(task_info)})
 	}).then(resp => {
 		if(!resp.ok)
 			throw new Error("Responce status: " + resp.status);
@@ -44,13 +44,13 @@ chrome.runtime.onMessage.addListener(async (msg, sender) => {
 	let tabId = sender.tab.id;
 
 	if(msg.operation == "send"){
-		sendAnswers(await Storage.get("server_key"), msg.taskset, msg.task_id, msg.answers).then(res => {
+		sendAnswers(await Storage.get("server_key"), msg.task_info, msg.answers).then(res => {
 			chrome.tabs.sendMessage(tabId, {from: "WORKER", to: msg.from, operation: "send", ...res});
 		}).catch(err => {
 			console.log(err);
 		});
 	}else if(msg.operation == "find"){
-		findAnswers(await Storage.get("server_key"), msg.taskset, msg.task_id).then(res => {
+		findAnswers(await Storage.get("server_key"), msg.task_info).then(res => {
 			chrome.tabs.sendMessage(tabId, {from: "WORKER", to: msg.from, operation: "find", ...res});
 		}).catch(err => {
 			console.log(err);
