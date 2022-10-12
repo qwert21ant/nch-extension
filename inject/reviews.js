@@ -59,7 +59,7 @@ function silentClaimReview(tasksetOrd){
 		if(!window.catchTId) return;
 
 		console.log(x);
-		if(x == "no_reviews") return;
+		if(x == "no_reviews" || x == "") return;
 		try {
 			JSON.parse(x);
 		} catch(err) {
