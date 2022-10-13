@@ -8,7 +8,7 @@ async function sendAnswers(key, task_info, answers){
 		headers: {
 			"Content-Type": "application/json"
 		},
-		body: JSON.stringify({"operation": "set", "key": key, "task_info": JSON.stringify(task_info), "answers": JSON.stringify(answers)})
+		body: JSON.stringify({"operation": "set", "key": key, "task_info": task_info, "answers": JSON.stringify(answers)})
 	}).then(resp => {
 		if(!resp.ok)
 			throw new Error("Responce status: " + resp.status);
@@ -25,7 +25,7 @@ async function findAnswers(key, task_info){
 		headers: {
 			"Content-Type": "application/json"
 		},
-		body: JSON.stringify({"operation": "find", "key": key, "task_info": JSON.stringify(task_info)})
+		body: JSON.stringify({"operation": "find", "key": key, "task_info": task_info})
 	}).then(resp => {
 		if(!resp.ok)
 			throw new Error("Responce status: " + resp.status);

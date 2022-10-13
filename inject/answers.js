@@ -17,27 +17,41 @@ var AnswersCollector = {
 	async send(){
 		window.postMessage({from: "INJECT", to: "WORKER", operation: "send", task_info: this.task_info, answers: this.answers});
 		return new Promise((res, rej) => {
-			let tid = setTimeout(() => rej("Timeout"), 5000);
+			let listener = null;
 
-			window.addEventListener("message", async e => {
+			let tid = setTimeout(() => {
+				window.removeEventListener("message", listener);
+				rej("Timeout");
+			}, 5000);
+
+			listener = async e => {
 				let msg = e.data;
 				if(!msg.from || msg.from != "WORKER" || msg.operation != "send") return;
 
 				clearTimeout(tid);
+				window.removeEventListener("message", listener);
+
 				if(msg.status == "error")
 					rej(msg.error);
+				else
+					res(msg.status);
+			};
 
-				res(msg.status);
-			});
+			window.addEventListener("message", listener);
 		});
 	},
 
 	async find(){
 		window.postMessage({from: "INJECT", to: "WORKER", operation: "find", task_info: this.task_info});
 		return new Promise((res, rej) => {
-			let tid = setTimeout(() => rej("Timeout"), 5000);
+			let listener = null;
 
-			window.addEventListener("message", async e => {
+			let tid = setTimeout(() => {
+				window.removeEventListener("message", listener);
+				rej("Timeout");
+			}, 5000);
+
+			listener = async e => {
 				let msg = e.data;
 				if(!msg.from || msg.from != "WORKER" || msg.operation != "find") return;
 
@@ -51,6 +65,8 @@ var AnswersCollector = {
 					if(!msg.answers)
 						rej("Empty msg.answers");
 
+					window.removeEventListener("message", listener);
+
 					try {
 						this.answers = JSON.parse(msg.answers);
 					} catch(err) {
@@ -60,7 +76,9 @@ var AnswersCollector = {
 				}
 
 				rej("Unknown status: " + msg.status);
-			});
+			};
+
+			window.addEventListener("message", listener);
 		});
 	},
 
