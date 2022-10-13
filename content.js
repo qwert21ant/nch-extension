@@ -76,29 +76,7 @@ window.addEventListener("message", async e => {
 		return;
 	}
 
-	if(msg.operation == "add"){
-		if(!msg.tag || !msg.id || !msg.key){
-			Q("div.config_panel .err_holder").innerHTML = "Empty tag/id/key";
-			Q("div.config_panel .suc_holder").innerHTML = "";
-			return;
-		}
-
-		if(await Storage.getAcc(msg.tag)){
-			Q("div.config_panel .err_holder").innerHTML = "This tag already exists";
-			Q("div.config_panel .suc_holder").innerHTML = "";
-			return;
-		}
-
-		await Storage.setAcc(msg.tag, msg.id, msg.key);
-		Q("div.config_panel .err_holder").innerHTML = "";
-		Q("div.config_panel .suc_holder").innerHTML = "Success";
-
-		Q("#acc_form input[name='tag']").value = "";
-		Q("#acc_form input[name='id']").value = "";
-		Q("#acc_form input[name='key']").value = "";
-
-		updateSelect();
-	}else if(msg.operation == "get"){
+	if(msg.operation == "get"){
 		let res = await Storage.getAcc(msg.tag);
 
 		window.postMessage({from: "CONTENT", to: "INJECT", operation: "change", tag: msg.tag, id: res[0], key: res[1]});

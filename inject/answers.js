@@ -205,26 +205,6 @@ window.reviewTimer = {
 	}
 };
 
-function saveServerKey(){
-	let input = Q("div.config_panel input[name='server_key']");
-	if(!input.value){
-		input.focus();
-		return;
-	}
-
-	window.postMessage({from: "INJECT", to: "CONTENT", operation: "set_key", server_key: input.value});
-}
-
-function saveServerIP(){
-	let input = Q("div.config_panel input[name='server_ip']");
-	if(!input.value){
-		input.focus();
-		return;
-	}
-
-	window.postMessage({from: "INJECT", to: "CONTENT", operation: "set_ip", server_ip: input.value});
-}
-
 let loadTaskInner_ = loadTaskInner;
 loadTaskInner = (tasksetOrd, userTaskId, x, reviewTimeLeft) => {
 	try {
