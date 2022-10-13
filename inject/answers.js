@@ -72,6 +72,10 @@ var AnswersCollector = {
 					} catch(err) {
 						rej("Error on parse msg.answers");
 					}
+
+					if(this.task_info.resubmits > msg.task_info.resubmits)
+						alert("WARNING: Task has been resubmitted! Answers may be incorrect!");
+
 					res(msg.status);
 				}
 
