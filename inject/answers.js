@@ -260,7 +260,7 @@ submitTask = (tasksetOrd, resubmits, isAcade) => {
 		.then(() => submitTask_(tasksetOrd, resubmits, isAcade))
 		.catch(err => alert(err));
 	else
-		submitTask_(tasksetOrd, resubmits)
+		submitTask_(tasksetOrd, resubmits, isAcade)
 };
 
 
