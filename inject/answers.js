@@ -56,10 +56,13 @@ var AnswersCollector = {
 				if(!msg.from || msg.from != "WORKER" || msg.operation != "find") return;
 
 				clearTimeout(tid);
+
 				if(msg.status == "error")
 					rej(msg.error);
 
-				if(msg.status == "task not found")
+				if(msg.status == "disabled")
+					res("disabled");
+				else if(msg.status == "task not found")
 					res(msg.status);
 				else if(msg.status == "task found"){
 					if(!msg.answers)
@@ -342,10 +345,14 @@ createChapterEditor = function(
 
 	AnswersCollector.find()
 	.then(fres => {
+		console.log(fres);
 		if(fres == "task not found"){
 			alert("Task not found");
-			return;
+			return res;
 		}
+
+		if(fres == "disabled")
+			return res;
 
 		let rootEl = document.querySelector("#divTask>span>table>tbody");
 

@@ -261,3 +261,68 @@ button:focus {
 	margin-top: 50px;
 	width: 100px;
 }
+
+/* switch */
+
+.switch_wrap {
+	margin-left: 30px;
+
+	user-select: none;
+}
+
+.switch_wrap span {
+	display: inline-block;
+
+	font-family: Consolas;
+	font-size: 14px;
+}
+
+.switch_wrap span.current {
+	font-weight: bold;
+}
+
+.switch {
+	display: inline-block;
+	position: relative;
+
+	width: 24px;
+	height: 8px;
+
+	margin: 0 5px;
+
+	box-sizing: border-box;
+
+	background: linear-gradient(90deg, #24e364 0%, #24e364 50%, #f73458 50%, #f73458 100%);
+	background-size: 200% 100%;
+	background-position: 100% 0%;
+	background-color: #c2c2c2;
+	border-radius: 4px;
+
+	cursor: pointer;
+
+	transition: all 200ms linear;
+}
+
+.switch .btn {
+	position: absolute;
+
+	left: -5px;
+	top: -4px;
+
+	width: 16px;
+	height: 16px;
+
+	box-sizing: border-box;
+	background-color: #878787;
+	border-radius: 50%;
+
+	transition: all 200ms ease-out;
+}
+
+.switch.moved {
+	background-position: 0% 0%;
+}
+
+.switch.moved .btn {
+	left: 12px;
+}

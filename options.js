@@ -97,6 +97,12 @@ window.onbeforeunload = () => {
 	if(hasChanges) return 0;
 }
 
+/* server status switch */
+
+
+function switchServerStatus() {
+
+}
 
 /* init */
 
@@ -158,4 +164,20 @@ window.onbeforeunload = () => {
 		updateAccList();
 		globalOnChange();
 	};
+
+	let switch_el = Q("#server .switch_wrap");
+	if(localConfig.server_status == 1){
+		switch_el.children[1].classList.toggle("moved");
+		switch_el.children[2].classList.toggle("current");
+	} else
+		switch_el.children[0].classList.toggle("current");
+
+	switch_el.addEventListener("click", () => {
+		switch_el.children[1].classList.toggle("moved");
+		switch_el.children[0].classList.toggle("current");
+		switch_el.children[2].classList.toggle("current");
+
+		localConfig.server_status = localConfig.server_status == 1 ? 0 : 1;
+		globalOnChange();
+	});
 })();

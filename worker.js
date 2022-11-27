@@ -3,6 +3,9 @@ importScripts("storage.js");
 //--------------------------------------------------
 
 async function sendAnswers(key, task_info, answers){
+	if(await Storage.get("server_status") != 1)
+		return {status: "disabled"};
+
 	return fetch("http://" + (await Storage.get("server_ip")) + ":8080/api/task", {
 		method: "POST",
 		headers: {
@@ -20,6 +23,9 @@ async function sendAnswers(key, task_info, answers){
 }
 
 async function findAnswers(key, task_info){
+	if(await Storage.get("server_status") != 1)
+		return {status: "disabled"};
+
 	return fetch("http://" + (await Storage.get("server_ip")) + ":8080/api/task", {
 		method: "POST",
 		headers: {
@@ -61,6 +67,10 @@ chrome.runtime.onMessage.addListener(async (msg, sender) => {
 chrome.runtime.onInstalled.addListener(() => {
 	Storage.get("acc_data").then(data => {
 		if(!data) Storage.set("acc_data", {});
+	});
+
+	Storage.get("server_status").then(data => {
+		if(!data) Storage.set("server_status", 0);
 	});
 
 	Storage.get("server_ip").then(data => {
