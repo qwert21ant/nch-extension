@@ -215,7 +215,7 @@ window.reviewTimer = {
 let loadTaskInner_ = loadTaskInner;
 loadTaskInner = (tasksetOrd, userTaskId, x, reviewTimeLeft) => {
 	try {
-		clearInterval(window.catchTId);
+		stopCatchers();
 	} catch(err) {};
 
 	loadTaskInner_(tasksetOrd, userTaskId, x, reviewTimeLeft);
@@ -317,17 +317,6 @@ function findSolution(exercise, answer){
 	}
 
 	return 0;
-}
-
-function nodeDFS(node, str){
-	if(!node.children.length)
-		return (node.innerHTML == str) ? node : null;
-
-	for(let el of node.children){
-		let res = nodeDFS(el, str);
-		if(res) return res;
-	}
-	return null;
 }
 
 let createChapterEditor_ = createChapterEditor;
