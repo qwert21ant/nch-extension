@@ -62,7 +62,7 @@ const AccMan = {
 			});
 			window.changed_account_id = id;
 
-			document.title = tag;
+			document.title = tag + " (" + id + ")";
 		} catch(err) {
 			alert("An error occured while changing account to " + id + "\n" + err.message);
 			console.log("changeAccount:");
