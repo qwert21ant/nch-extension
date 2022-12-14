@@ -167,7 +167,7 @@ function showAcadeCatchButton(x){
 let ajax_ = ajax;
 ajax = (page, callback, optionalQ, optionalArgs, optionalPOST) => {
 	let args = optionalArgs || {};
-	let optionalQ = optionalQ || "";
+	optionalQ = optionalQ || "";
     let post = optionalPOST ? {'method': 'POST', 'headers': { 'Content-Type': 'application/json' }, 'body': JSON.stringify(optionalPOST)} : {};
 	if(page == "load_acade_projects"){
 		window.contract.account.signTransaction('app.nearcrowd.near', [nearApi.transactions.functionCall('v2', args, 0, 0)])
