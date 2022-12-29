@@ -18,7 +18,7 @@ async function my_ff(response){
                 text = text.trim().split('\n').splice(-1)[0];
 
             //throw new Error("Request to server failed with: " + response.statusText + "\n\n" + text);
-            rej("Request to server failed with: " + response.statusText + "\n\n" + text);
+            rej("Request to server failed with: " + response.statusText + "\n\n" + text); //
         }
         res(text);
     });
@@ -36,7 +36,7 @@ async function my_ajax(page, optionalQ, optionalArgs){
 			fetch('/v2/' + page + '/' + encodeURIComponent(encodedTx) + optionalQ)
 			.then(response => my_ff(response))
 			.then(res)
-			.catch(rej);
+			.catch(() => res("")); //
 		})
 		.catch(rej);
 	});
@@ -107,7 +107,7 @@ class ReviewCatcher {
             if(!this.catchTId) return;
 
             console.log(x);
-            if(x == "no_reviews" || x == "") return;
+            if(x == "no_reviews" || !x || x.startsWith("Traceback")) return;
             try {
                 JSON.parse(x);
             } catch(err) {
