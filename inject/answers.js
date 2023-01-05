@@ -229,6 +229,11 @@ loadTaskInner = (tasksetOrd, userTaskId, x, reviewTimeLeft) => {
 
 	AnswersCollector.setTaskInfo(tasksetOrd, dx.user_task_id, dx.mode, dx.resubmits);
 
+	divTask.firstChild.style.cursor = "pointer";
+	divTask.firstChild.addEventListener("click", async () => {
+		await navigator.clipboard.writeText(dx.short_descr);
+	});
+
 	let timeEl = divTask.children[4];
 
 	let idHolder = document.createElement("span");
