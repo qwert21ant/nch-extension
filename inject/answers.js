@@ -231,7 +231,12 @@ loadTaskInner = (tasksetOrd, userTaskId, x, reviewTimeLeft) => {
 
 	divTask.firstChild.style.cursor = "pointer";
 	divTask.firstChild.addEventListener("click", async () => {
-		await navigator.clipboard.writeText(dx.short_descr);
+		let txt = dx.short_descr;
+		txt = txt.replace(/ +/g, " ");
+		txt = txt.replace(/^ | $/g, "");
+		console.log(dx.short_descr);
+		console.log(txt);
+		await navigator.clipboard.writeText(txt);
 	});
 
 	let timeEl = divTask.children[4];
