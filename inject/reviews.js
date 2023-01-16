@@ -135,6 +135,13 @@ function findChildNode(parent, str){
     );
 }
 
+function findChildNodeByInclude(parent, type, str){
+    return Array.prototype.find.call(
+        Array.from(parent.children),
+        el => el.innerHTML.includes(str) && type.toUpperCase() == el.tagName
+    );
+}
+
 function nodeDFS(node, str){
     if(!node.children.length)
         return (node.innerHTML == str) ? node : null;
@@ -154,11 +161,30 @@ function showAcadeCatchButton(x){
         return;
     }
 
+    let ids = dx.map(el => el.pillar_set_id);
+
+    console.log(dx);
+    let el = findChildNodeByInclude(divTask, "span", "You can claim a new review");
+    let catcherAll = new ReviewCatcher("?acade_id=" + ids.join(","));
+
+    let claimAllBtn = document.createElement("button");
+    claimAllBtn.setAttribute("name", "claim_review");
+    claimAllBtn.innerHTML = "Claim All Reviews";
+    claimAllBtn.style = "margin-right: 10px;";
+
+    claimAllBtn.onclick = () => claimReview(750, "?acade_id=" + ids.join(","));
+
+    divTask.insertBefore(claimAllBtn, el.nextSibling);
+
+    catcherAll.createButtons(divTask, claimAllBtn, 750);
+    catcherAll.catchBtn.innerHTML = "Catch All Reviews";
+    catchers.push(catcherAll)
+
     let par_el = Q("#divTask span ul");
     for(let i = 0; i < dx.length; i++){
         let li_el = par_el.children[i];
         let claimBtn = findChildNode(li_el, "Claim Review");
-        let catcher = new ReviewCatcher("?acade_id=" + dx[i].pillar_set_id);
+        let catcher = new ReviewCatcher("?acade_id=" + ids[i]);
         catcher.createButtons(li_el, claimBtn, 750);
         catchers.push(catcher);
     }
