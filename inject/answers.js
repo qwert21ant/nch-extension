@@ -266,14 +266,14 @@ submitReview = (tasksetOrd, verdict, quality, comment) => {
 };
 
 let submitTask_ = submitTask;
-submitTask = (tasksetOrd, resubmits, isAcade) => {
+submitTask = (tasksetOrd, resubmits, isAcade, nightskyPuzzles) => {
 	if(tasksetOrd == 23)
 		AnswersCollector.collect()
 		.then(() => AnswersCollector.send())
-		.then(() => submitTask_(tasksetOrd, resubmits, isAcade))
+		.then(() => submitTask_(tasksetOrd, resubmits, isAcade, nightskyPuzzles))
 		.catch(err => alert(err));
 	else
-		submitTask_(tasksetOrd, resubmits, isAcade)
+		submitTask_(tasksetOrd, resubmits, isAcade, nightskyPuzzles)
 };
 
 
